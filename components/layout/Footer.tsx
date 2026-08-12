@@ -53,10 +53,10 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
 
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <div className="relative w-12 h-12 shrink-0">
                 <Image
@@ -65,6 +65,7 @@ export default function Footer() {
                   fill
                   sizes="48px"
                   className="object-contain rounded-full"
+                  priority
                 />
               </div>
               <div>
@@ -84,7 +85,7 @@ export default function Footer() {
                 { icon: Globe,     href: "https://aitdigitalsolutions.com" },
               ].map(({ icon: Icon, href }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-500 hover:text-gold hover:border-gold/40 hover:bg-gold/5 transition-all duration-200">
+                  className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-gray-500 hover:text-gold hover:border-gold/40 hover:bg-gold/5 transition-all duration-200">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -96,9 +97,9 @@ export default function Footer() {
             <h4 className="font-heading font-semibold text-white text-sm mb-5 flex items-center gap-2">
               <span className="w-3 h-0.5 bg-gold" /> Quick Links
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-1">
               {quickLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} className="py-1">
                   <Link href={link.href}
                     className="text-gray-500 hover:text-gold text-sm transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-3 h-3 text-gold/30 group-hover:text-gold group-hover:translate-x-1 transition-all" />
@@ -114,9 +115,9 @@ export default function Footer() {
             <h4 className="font-heading font-semibold text-white text-sm mb-5 flex items-center gap-2">
               <span className="w-3 h-0.5 bg-gold" /> Our Services
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-1">
               {services.map((s) => (
-                <li key={s}>
+                <li key={s} className="py-1">
                   <Link href="/services"
                     className="text-gray-500 hover:text-gold text-sm transition-colors flex items-center gap-2 group">
                     <ArrowRight className="w-3 h-3 text-gold/30 group-hover:text-gold group-hover:translate-x-1 transition-all" />

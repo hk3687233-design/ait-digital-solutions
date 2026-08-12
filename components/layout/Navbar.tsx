@@ -73,7 +73,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -86,7 +86,7 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <div className="hidden lg:flex items-center gap-5">
+          <div className="hidden md:flex items-center gap-5">
             <a
               href="tel:+923166768001"
               className="flex items-center gap-2 text-sm text-ink-muted hover:text-gold transition-colors duration-200"
@@ -105,7 +105,7 @@ export default function Navbar() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden p-2 text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-surface-100"
+            className="md:hidden w-11 h-11 flex items-center justify-center text-ink-muted hover:text-ink transition-colors rounded-lg hover:bg-surface-100"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -115,7 +115,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div
           className={cn(
-            "lg:hidden overflow-hidden transition-all duration-300",
+            "md:hidden overflow-hidden transition-all duration-300",
             menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           )}
         >
