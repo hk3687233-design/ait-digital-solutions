@@ -2,10 +2,10 @@
 
 import { useRef } from "react";
 
-export default function SpotlightCard({ children, className = "" }) {
-  const ref = useRef(null);
+export default function SpotlightCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
 
-  function onMove(e) {
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
