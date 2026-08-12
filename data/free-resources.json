@@ -1,0 +1,193 @@
+{
+  "tools": [
+    {
+      "id": "1",
+      "name": "ChatGPT",
+      "description": "World's most popular AI chatbot. Write scripts, emails, captions, business plans & more in seconds.",
+      "category": "AI Writing",
+      "url": "https://chat.openai.com",
+      "badge": "Free",
+      "icon": "🤖"
+    },
+    {
+      "id": "2",
+      "name": "Claude AI",
+      "description": "Anthropic's powerful AI for long-form writing, analysis, coding, and creative tasks.",
+      "category": "AI Writing",
+      "url": "https://claude.ai",
+      "badge": "Free",
+      "icon": "✨"
+    },
+    {
+      "id": "3",
+      "name": "Google Gemini",
+      "description": "Google's AI — great for research, Google Workspace integration, and multilingual tasks.",
+      "category": "AI Writing",
+      "url": "https://gemini.google.com",
+      "badge": "Free",
+      "icon": "💎"
+    },
+    {
+      "id": "4",
+      "name": "Canva Free",
+      "description": "Design stunning graphics, thumbnails, reels, presentations — no design skills needed.",
+      "category": "Design",
+      "url": "https://canva.com",
+      "badge": "Free",
+      "icon": "🎨"
+    },
+    {
+      "id": "5",
+      "name": "CapCut",
+      "description": "Professional video editing for TikTok, Reels & YouTube Shorts with AI auto-captions.",
+      "category": "Video",
+      "url": "https://capcut.com",
+      "badge": "Free",
+      "icon": "🎬"
+    },
+    {
+      "id": "6",
+      "name": "ElevenLabs",
+      "description": "AI voice generator — create human-like voiceovers for YouTube videos in any language.",
+      "category": "AI Voice",
+      "url": "https://elevenlabs.io",
+      "badge": "Free Tier",
+      "icon": "🎙️"
+    },
+    {
+      "id": "7",
+      "name": "Ubersuggest",
+      "description": "Free SEO & keyword research tool to find trending topics and YouTube video ideas.",
+      "category": "SEO",
+      "url": "https://neilpatel.com/ubersuggest",
+      "badge": "Free",
+      "icon": "🔍"
+    },
+    {
+      "id": "8",
+      "name": "Notion",
+      "description": "All-in-one workspace for notes, planning, client management, and content calendars.",
+      "category": "Productivity",
+      "url": "https://notion.so",
+      "badge": "Free",
+      "icon": "📋"
+    },
+    {
+      "id": "9",
+      "name": "Pexels",
+      "description": "Thousands of free stock photos and videos — no copyright worries for YouTube or social media.",
+      "category": "Media",
+      "url": "https://pexels.com",
+      "badge": "Free",
+      "icon": "📷"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "1",
+      "title": "YouTube Video Script Writer",
+      "category": "YouTube",
+      "usage": "Paste into ChatGPT or Claude — replace [TOPIC] with your video idea",
+      "prompt": "You are a professional YouTube scriptwriter. Write a complete, engaging script for a YouTube video about [TOPIC]. Include:\n- A strong hook in the first 30 seconds\n- 3-5 main sections with clear transitions\n- A compelling call-to-action at the end\n- Estimated speaking time for each section\nTone: conversational, energetic, and educational. Target audience: Pakistani digital entrepreneurs aged 18-35."
+    },
+    {
+      "id": "2",
+      "title": "Viral TikTok Caption Generator",
+      "category": "TikTok",
+      "usage": "Add your video description and let AI generate 5 caption options",
+      "prompt": "Generate 5 viral TikTok captions for a video about [VIDEO DESCRIPTION]. Each caption should:\n- Start with a hook that stops the scroll\n- Be under 150 characters\n- Include 5-7 relevant hashtags\n- Have a question or CTA to boost comments\nMake them punchy, relatable, and shareable for a Pakistani audience."
+    },
+    {
+      "id": "3",
+      "title": "Product Description for E-Commerce",
+      "category": "E-Commerce",
+      "usage": "Replace [PRODUCT] and [KEY FEATURES] with your product details",
+      "prompt": "Write a high-converting product description for [PRODUCT]. Key features: [KEY FEATURES]. Include:\n- An attention-grabbing headline\n- 3-4 benefit-focused bullet points (not just features)\n- A short story or use case\n- A clear call-to-action\n- SEO keywords naturally woven in\nTone: persuasive but trustworthy. Keep it under 200 words."
+    },
+    {
+      "id": "4",
+      "title": "Freelancer Proposal Template",
+      "category": "Freelancing",
+      "usage": "Fill in your skills and the client project details",
+      "prompt": "Write a professional Upwork/Fiverr proposal for [CLIENT PROJECT]. My skills: [YOUR SKILLS]. The proposal should:\n- Open with the client's problem (not 'I am a designer with 5 years experience')\n- Show I understand their specific needs\n- Offer a clear, results-focused solution\n- Include a brief relevant experience or result\n- End with a confident but soft CTA\nKeep it under 200 words. Sound human, confident, and client-focused."
+    },
+    {
+      "id": "5",
+      "title": "Instagram Bio Optimizer",
+      "category": "Social Media",
+      "usage": "Replace placeholders with your actual info and niche",
+      "prompt": "Write 3 different professional Instagram bios for a [NICHE] creator/business. Each bio should:\n- Be under 150 characters\n- Clearly state who I help and what I do\n- Include a unique value proposition\n- End with a call-to-action (link in bio, DM, etc.)\n- Use 1-2 relevant emojis\nMy target audience: [TARGET AUDIENCE]. My main service/content: [WHAT YOU DO]."
+    },
+    {
+      "id": "6",
+      "title": "Email Marketing Campaign",
+      "category": "Digital Marketing",
+      "usage": "Best for course launches, promotions, and lead nurturing",
+      "prompt": "Write a 3-email welcome sequence for new subscribers who signed up for [LEAD MAGNET/FREEBIE]. Email 1 (Deliver + Introduce): deliver the promised resource and introduce myself. Email 2 (Value): share my best tip related to [TOPIC] — no selling. Email 3 (Offer): introduce my paid course/service [PRODUCT NAME] with a special offer. Tone: friendly, personal, conversational. Each email: subject line + preview text + body (under 300 words)."
+    },
+    {
+      "id": "7",
+      "title": "SEO Blog Article Outline",
+      "category": "Content",
+      "usage": "Great for ranking on Google and generating passive traffic",
+      "prompt": "Create a detailed SEO-optimized blog post outline for the keyword '[TARGET KEYWORD]'. Include:\n- An H1 title with the keyword\n- Meta description (under 160 characters)\n- 5-7 H2 sections with H3 subsections\n- Key points to cover in each section\n- Internal linking suggestions\n- FAQ section with 3-4 questions\n- Word count recommendation\nTarget audience: [AUDIENCE]. Search intent: [INFORMATIONAL/COMMERCIAL/TRANSACTIONAL]."
+    },
+    {
+      "id": "8",
+      "title": "Business Plan in 5 Minutes",
+      "category": "Business",
+      "usage": "Quick business plan for pitching or personal clarity",
+      "prompt": "Create a 1-page business plan for my [BUSINESS IDEA]. Include:\n- Business name and tagline\n- Problem it solves\n- Target customer (specific)\n- Solution / Product description\n- Revenue model (how I make money)\n- 3 key marketing channels\n- 90-day action plan with 5 milestones\n- Startup cost estimate\nMake it practical, not theoretical. I am based in Pakistan and targeting [LOCAL/INTERNATIONAL] customers."
+    }
+  ],
+  "resources": [
+    {
+      "id": "1",
+      "title": "AIT Digital Solutions YouTube Channel",
+      "description": "Free tutorials on YouTube Automation, AI Tools, Freelancing, and Digital Marketing in Urdu & English.",
+      "category": "YouTube",
+      "url": "https://youtube.com/@AITDigitalSolutions",
+      "type": "YouTube Channel"
+    },
+    {
+      "id": "2",
+      "title": "Google Digital Garage",
+      "description": "Free certified courses by Google covering digital marketing, data, career development and more.",
+      "category": "Courses",
+      "url": "https://learndigital.withgoogle.com",
+      "type": "Free Course"
+    },
+    {
+      "id": "3",
+      "title": "Meta Blueprint",
+      "description": "Official Facebook & Instagram marketing courses — free certificates included.",
+      "category": "Social Media",
+      "url": "https://www.facebook.com/business/learn",
+      "type": "Free Course"
+    },
+    {
+      "id": "4",
+      "title": "HubSpot Academy",
+      "description": "Free marketing, sales, and business courses with globally recognized certificates.",
+      "category": "Marketing",
+      "url": "https://academy.hubspot.com",
+      "type": "Free Course"
+    },
+    {
+      "id": "5",
+      "title": "Coursera — Audit for Free",
+      "description": "Audit thousands of courses from top universities for free. Only pay if you want the certificate.",
+      "category": "Courses",
+      "url": "https://coursera.org",
+      "type": "Platform"
+    },
+    {
+      "id": "6",
+      "title": "Shopify Free Trial",
+      "description": "Start your e-commerce store with Shopify's 3-day free trial. Best for dropshipping beginners.",
+      "category": "E-Commerce",
+      "url": "https://shopify.com",
+      "type": "Tool"
+    }
+  ]
+}

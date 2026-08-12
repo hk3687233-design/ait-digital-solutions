@@ -1,0 +1,140 @@
+[
+  {
+    "id": "c1",
+    "title": "YouTube Automation Masterclass",
+    "level": "Beginner → Advanced",
+    "duration": "6 Weeks",
+    "rating": 5,
+    "students": "3,500+",
+    "price": "PKR 15,000",
+    "badge": "Most Popular",
+    "color": "#FF0000",
+    "iconName": "Youtube",
+    "outcome": "Launch your first monetized YouTube channel within 30 days.",
+    "includes": [
+      "Niche Research Framework",
+      "AI Script Writing System",
+      "Voiceover & Editing Tools",
+      "SEO & Thumbnail Mastery",
+      "Monetization Strategies",
+      "Scaling to Multiple Channels",
+      "Lifetime Community Access",
+      "Certificate of Completion"
+    ]
+  },
+  {
+    "id": "c2",
+    "title": "TikTok Automation & Growth",
+    "level": "Beginner",
+    "duration": "4 Weeks",
+    "rating": 5,
+    "students": "2,200+",
+    "price": "PKR 12,000",
+    "badge": "Trending",
+    "color": "#111111",
+    "iconName": "Zap",
+    "outcome": "Reach 10,000 followers and earn from TikTok within 60 days.",
+    "includes": [
+      "TikTok Algorithm Decoded",
+      "Viral Content Formula",
+      "Automated Posting Systems",
+      "Hashtag & Sound Strategy",
+      "Monetization Methods",
+      "Brand Deal Outreach",
+      "Analytics & Optimization",
+      "Certificate of Completion"
+    ]
+  },
+  {
+    "id": "c3",
+    "title": "E-Commerce Automation",
+    "level": "Beginner → Intermediate",
+    "duration": "8 Weeks",
+    "rating": 5,
+    "students": "1,800+",
+    "price": "PKR 20,000",
+    "badge": "High ROI",
+    "color": "#96BF48",
+    "iconName": "ShoppingCart",
+    "outcome": "Launch your store and make your first sale within 2 weeks.",
+    "includes": [
+      "Product Research Method",
+      "Shopify Store Setup",
+      "Winning Product Formula",
+      "Facebook & TikTok Ads",
+      "Supplier & Fulfillment",
+      "Automation Tools",
+      "Scaling Playbook",
+      "Certificate of Completion"
+    ]
+  },
+  {
+    "id": "c4",
+    "title": "Digital Marketing Pro",
+    "level": "Beginner → Advanced",
+    "duration": "10 Weeks",
+    "rating": 5,
+    "students": "4,100+",
+    "price": "PKR 18,000",
+    "badge": "Best Value",
+    "color": "#F5B400",
+    "iconName": "TrendingUp",
+    "outcome": "Run profitable ad campaigns and manage clients within 3 months.",
+    "includes": [
+      "SEO from Scratch",
+      "Google Ads Mastery",
+      "Facebook Ads Blueprint",
+      "Social Media Strategy",
+      "Email Marketing",
+      "Content Marketing",
+      "Analytics & Reporting",
+      "Certificate of Completion"
+    ]
+  },
+  {
+    "id": "c5",
+    "title": "Freelancing Mastery",
+    "level": "Beginner",
+    "duration": "5 Weeks",
+    "rating": 5,
+    "students": "5,000+",
+    "price": "PKR 10,000",
+    "badge": "Top Rated",
+    "color": "#1DBF73",
+    "iconName": "Users",
+    "outcome": "Land your first paid client within 30 days of enrollment.",
+    "includes": [
+      "Upwork Profile Optimization",
+      "Fiverr Gig Strategy",
+      "Proposal Writing Formula",
+      "Pricing & Packaging",
+      "Client Communication",
+      "Payment & Invoicing",
+      "Client Retention",
+      "Certificate of Completion"
+    ]
+  },
+  {
+    "id": "c6",
+    "title": "AI Tools Mastery",
+    "level": "All Levels",
+    "duration": "4 Weeks",
+    "rating": 5,
+    "students": "2,800+",
+    "price": "PKR 8,000",
+    "badge": "Future-Proof",
+    "color": "#7C3AED",
+    "iconName": "Brain",
+    "outcome": "Automate 80% of your work and charge premium rates to clients.",
+    "includes": [
+      "ChatGPT Advanced Prompting",
+      "Midjourney AI Art",
+      "AI Video Generation",
+      "Automation with Zapier",
+      "AI for Business",
+      "Monetization Strategies",
+      "Tool Stack Setup",
+      "Certificate of Completion"
+    ]
+  }
+]

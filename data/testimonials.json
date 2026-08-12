@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Ahmed Raza",
+    "role": "Freelance Designer — Gujranwala",
+    "rating": 5,
+    "text": "AIT changed my life. Within 3 months of their Freelancing course I was earning $800/month on Upwork. The practical approach is unlike anything else I've tried.",
+    "initial": "A"
+  },
+  {
+    "id": "2",
+    "name": "Sana Malik",
+    "role": "YouTube Creator — Lahore",
+    "rating": 5,
+    "text": "The YouTube Automation course is gold. My channel went from 0 to 15,000 subscribers in 4 months using exactly what they taught. Incredible mentorship.",
+    "initial": "S"
+  },
+  {
+    "id": "3",
+    "name": "Bilal Hussain",
+    "role": "E-Commerce Entrepreneur — Faisalabad",
+    "rating": 5,
+    "text": "The E-Commerce training helped me launch my Shopify store and make my first sale in week 2. The community support is amazing. Worth every rupee.",
+    "initial": "B"
+  },
+  {
+    "id": "4",
+    "name": "Fareeha Naz",
+    "role": "Digital Marketer — Gujranwala",
+    "rating": 5,
+    "text": "Arslan bhai explains complex digital marketing concepts in the simplest way. My agency now handles 5 clients thanks to AIT's Digital Marketing course.",
+    "initial": "F"
+  },
+  {
+    "id": "5",
+    "name": "Usman Tariq",
+    "role": "AI Tools Specialist — Islamabad",
+    "rating": 5,
+    "text": "The AI Tools training is the most up-to-date content I've found in Pakistan. I now automate 80% of my work and charge premium rates to clients.",
+    "initial": "U"
+  },
+  {
+    "id": "6",
+    "name": "Zara Khan",
+    "role": "Content Creator — Karachi",
+    "rating": 5,
+    "text": "AIT is not just a course platform — it's a complete ecosystem. From strategy to execution, they have everything a digital creator needs to grow.",
+    "initial": "Z"
+  }
+]

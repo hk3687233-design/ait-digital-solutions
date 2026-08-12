@@ -1,0 +1,164 @@
+[
+  {
+    "id": "s1",
+    "title": "YouTube Automation",
+    "tagline": "Build Passive Income Channels",
+    "color": "#FF0000",
+    "iconName": "Youtube",
+    "desc": "Create faceless YouTube channels that generate passive income while you sleep. We teach you complete automation — from niche selection and AI-generated scripts to voiceovers, editing, SEO, and monetization strategy.",
+    "features": [
+      "Niche Research & Validation",
+      "AI Script & Voiceover Setup",
+      "Video Editing Automation",
+      "YouTube SEO & Thumbnail Strategy",
+      "Monetization & Scaling",
+      "Analytics & Optimization"
+    ],
+    "price": "From PKR 15,000",
+    "type": "Course + Service"
+  },
+  {
+    "id": "s2",
+    "title": "TikTok Automation",
+    "tagline": "Viral Growth on Autopilot",
+    "color": "#010101",
+    "iconName": "Zap",
+    "desc": "Master TikTok's algorithm with automated content pipelines. Learn to produce viral content at scale, grow your audience, and turn views into revenue through creator fund, brand deals, and product promotions.",
+    "features": [
+      "Content Strategy & Ideation",
+      "Automated Video Production",
+      "Viral Hook Formulas",
+      "Hashtag & Trend Research",
+      "Growth Analytics",
+      "Monetization Pathways"
+    ],
+    "price": "From PKR 12,000",
+    "type": "Course + Service"
+  },
+  {
+    "id": "s3",
+    "title": "E-Commerce Automation",
+    "tagline": "Launch & Scale Your Store",
+    "color": "#96BF48",
+    "iconName": "ShoppingCart",
+    "desc": "Build a profitable e-commerce business from scratch or scale an existing store. We cover product research, supplier sourcing, Shopify store setup, ad campaigns, and full business automation.",
+    "features": [
+      "Product & Niche Research",
+      "Shopify Store Setup & Design",
+      "Supplier & Fulfillment Setup",
+      "Facebook & TikTok Ads",
+      "Order Automation",
+      "Scaling Strategies"
+    ],
+    "price": "From PKR 20,000",
+    "type": "Course + Done-For-You"
+  },
+  {
+    "id": "s4",
+    "title": "Digital Marketing",
+    "tagline": "Data-Driven ROI Marketing",
+    "color": "#F5B400",
+    "iconName": "TrendingUp",
+    "desc": "Full-spectrum digital marketing services — from SEO and content marketing to paid advertising and social media management. We build campaigns that generate real, measurable results for your business.",
+    "features": [
+      "SEO & Content Strategy",
+      "Facebook & Google Ads",
+      "Social Media Management",
+      "Email Marketing",
+      "Conversion Rate Optimization",
+      "Monthly Analytics Reports"
+    ],
+    "price": "From PKR 25,000/mo",
+    "type": "Managed Service"
+  },
+  {
+    "id": "s5",
+    "title": "Freelancing Mastery",
+    "tagline": "From Zero to 5-Figure Clients",
+    "color": "#1DBF73",
+    "iconName": "Users",
+    "desc": "Master the art of freelancing on Upwork, Fiverr, and LinkedIn. Learn profile optimization, proposal writing, pricing strategy, client communication, and how to build long-term retainer relationships.",
+    "features": [
+      "Platform Profile Optimization",
+      "Winning Proposal Templates",
+      "Pricing & Packaging Strategy",
+      "Client Communication Scripts",
+      "Niche Positioning",
+      "Client Retention Systems"
+    ],
+    "price": "From PKR 10,000",
+    "type": "Course"
+  },
+  {
+    "id": "s6",
+    "title": "AI Tools Training",
+    "tagline": "Master the Future of Work",
+    "color": "#7C3AED",
+    "iconName": "Brain",
+    "desc": "Stay ahead of the curve with hands-on training in the most powerful AI tools — ChatGPT, Midjourney, Runway, Zapier, and more. Learn to automate workflows, create content at scale, and future-proof your career.",
+    "features": [
+      "ChatGPT Mastery & Prompting",
+      "Midjourney & AI Image Creation",
+      "AI Video Generation",
+      "Workflow Automation (Zapier/Make)",
+      "AI for Business & Marketing",
+      "Monetizing AI Skills"
+    ],
+    "price": "From PKR 8,000",
+    "type": "Course"
+  },
+  {
+    "id": "s7",
+    "title": "Web Development",
+    "tagline": "Premium Websites That Convert",
+    "color": "#0EA5E9",
+    "iconName": "Code2",
+    "desc": "We design and develop fast, beautiful, and conversion-optimized websites using the latest technologies. From business websites to complex web applications — built to perform, rank, and impress.",
+    "features": [
+      "Custom Design & Branding",
+      "React / Next.js Development",
+      "WordPress & Elementor",
+      "SEO Optimization",
+      "Performance & Speed",
+      "Ongoing Maintenance"
+    ],
+    "price": "From PKR 30,000",
+    "type": "Done-For-You Service"
+  },
+  {
+    "id": "s8",
+    "title": "Mobile App Development",
+    "tagline": "iOS & Android Apps That Delight",
+    "color": "#F59E0B",
+    "iconName": "Smartphone",
+    "desc": "Cross-platform mobile applications built with Flutter and React Native. We handle everything from UI/UX design and backend development to App Store submission and post-launch support.",
+    "features": [
+      "UI/UX Design",
+      "Flutter / React Native",
+      "Backend API Integration",
+      "App Store Submission",
+      "Push Notifications",
+      "Ongoing Support"
+    ],
+    "price": "From PKR 80,000",
+    "type": "Done-For-You Service"
+  },
+  {
+    "id": "s9",
+    "title": "Branding & Design",
+    "tagline": "Brands That Command Premium",
+    "color": "#EC4899",
+    "iconName": "Palette",
+    "desc": "Build a brand identity that makes people stop scrolling. We create comprehensive brand systems — logo, color palette, typography, brand guidelines, and all visual assets — that communicate authority and trust.",
+    "features": [
+      "Logo Design & Variations",
+      "Brand Identity System",
+      "Color Palette & Typography",
+      "Brand Guidelines Document",
+      "Social Media Templates",
+      "Stationery & Print Design"
+    ],
+    "price": "From PKR 15,000",
+    "type": "Done-For-You Service"
+  }
+]
