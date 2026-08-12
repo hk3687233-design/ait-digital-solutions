@@ -341,3 +341,82 @@ body {
 /* Swiper customization */
 .swiper-pagination-bullet        { background: rgba(245,180,0,0.35) !important; }
 .swiper-pagination-bullet-active { background: #F5B400 !important; }
+
+/* ─── Aurora animated mesh background ───────────────── */
+.aurora-mesh {
+  background: linear-gradient(-45deg,
+    rgba(255,253,240,1),
+    rgba(255,248,200,0.6),
+    rgba(255,255,255,1),
+    rgba(255,243,160,0.4),
+    rgba(255,255,255,1)
+  );
+  background-size: 400% 400%;
+  animation: aurora 12s ease infinite;
+}
+
+/* ─── Spotlight card — JS sets --x/--y via style ────── */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 50%),
+    rgba(245,180,0,0.10),
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.spotlight-card:hover::before { opacity: 1; }
+
+/* ─── Animated glow border for premium cards ─────────── */
+.glow-card {
+  position: relative;
+}
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(245,180,0,0.5), transparent, rgba(245,180,0,0.3));
+  background-size: 200% 200%;
+  animation: aurora 6s ease infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+.glow-card:hover::after { opacity: 1; }
+
+/* ─── Marquee pause on hover ─────────────────────────── */
+.marquee-track:hover .marquee-inner { animation-play-state: paused; }
+
+/* ─── Gradient text shimmer (active version) ─────────── */
+.gold-shimmer {
+  background: linear-gradient(90deg, #D4A000 0%, #FFD000 30%, #F5B400 50%, #FFD000 70%, #D4A000 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Pulsing glow rings ─────────────────────────────── */
+@keyframes ring-pulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+.ring-pulse {
+  animation: ring-pulse 2.5s ease-out infinite;
+}
+.ring-pulse-delay {
+  animation: ring-pulse 2.5s ease-out 1.25s infinite;
+}

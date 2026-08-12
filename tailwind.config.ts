@@ -69,6 +69,10 @@ const config: Config = {
         "fade-up":        "fade-up 0.6s ease forwards",
         "glow-pulse":     "glow-pulse 2s ease-in-out infinite alternate",
         "border-flow":    "border-flow 3s linear infinite",
+        "marquee":        "marquee 30s linear infinite",
+        "marquee-reverse":"marquee-reverse 30s linear infinite",
+        "aurora":         "aurora 12s ease infinite",
+        "glow-border":    "glow-border 3s ease-in-out infinite",
       },
       keyframes: {
         float: {
@@ -94,6 +98,22 @@ const config: Config = {
         "border-flow": {
           "0%,100%": { backgroundPosition: "0% 50%"   },
           "50%":     { backgroundPosition: "100% 50%" },
+        },
+        "marquee": {
+          "0%":   { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-reverse": {
+          "0%":   { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        "aurora": {
+          "0%,100%": { backgroundPosition: "0% 50%" },
+          "50%":     { backgroundPosition: "100% 50%" },
+        },
+        "glow-border": {
+          "0%,100%": { opacity: "0.4", boxShadow: "0 0 20px rgba(245,180,0,0.1)" },
+          "50%":     { opacity: "1",   boxShadow: "0 0 40px rgba(245,180,0,0.3)" },
         },
       },
       borderRadius: {

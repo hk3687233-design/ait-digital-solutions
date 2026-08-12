@@ -1,4 +1,5 @@
 import Hero        from "@/components/home/Hero";
+import Marquee     from "@/components/shared/Marquee";
 import Services    from "@/components/home/Services";
 import Stats       from "@/components/home/Stats";
 import Ecosystem   from "@/components/home/Ecosystem";
@@ -55,6 +56,7 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Hero />
+      <Marquee />
       <Services />
       <Stats />
       <Ecosystem />

@@ -2,17 +2,31 @@
 
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 import FadeUp from "@/components/shared/FadeUp";
 
 export default function CTA() {
   return (
     <section className="section-dark section-padding relative overflow-hidden">
-      {/* Gold radial glow */}
+      {/* Animated aurora glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full opacity-10"
-          style={{ background: "radial-gradient(ellipse, #F5B400 0%, transparent 65%)" }} />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full opacity-8"
+          style={{
+            background: "radial-gradient(ellipse, rgba(245,180,0,0.15) 0%, transparent 65%)",
+            animation: "aurora 8s ease infinite",
+            backgroundSize: "200% 200%",
+          }}
+        />
       </div>
-      <div className="absolute inset-0 grid-pattern-dark pointer-events-none" />
+
+      {/* Pulsing rings */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="w-64 h-64 rounded-full border border-gold/10 ring-pulse" />
+        <div className="absolute inset-0 w-64 h-64 rounded-full border border-gold/8 ring-pulse-delay" />
+      </div>
+
+      <div className="absolute inset-0 grid-pattern-dark opacity-40 pointer-events-none" />
 
       {/* Decorative corners */}
       <div className="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-gold/30 rounded-tl-xl" />
@@ -27,7 +41,7 @@ export default function CTA() {
 
         <h2 className="font-heading font-black text-white text-3xl sm:text-4xl md:text-6xl leading-[1.05] mb-6">
           Your Digital Future<br />
-          <span className="gold-text">Starts Right Now</span>
+          <span className="gold-shimmer">Starts Right Now</span>
         </h2>
 
         <p className="text-gray-400 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
@@ -36,20 +50,24 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Link
-            href="/contact"
-            className="btn-gold w-full sm:w-auto px-8 sm:px-10 py-4 rounded-full text-sm sm:text-base font-bold shadow-gold inline-flex items-center justify-center gap-2"
-          >
-            Enroll Now — Free Consultation
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-          <a
-            href="tel:+923166768001"
-            className="btn-outline-gold w-full sm:w-auto px-8 sm:px-10 py-4 rounded-full text-sm sm:text-base font-bold inline-flex items-center justify-center gap-2"
-          >
-            <Phone className="w-4 h-4" />
-            Call Us: 0316 6768001
-          </a>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/contact"
+              className="btn-gold w-full sm:w-auto px-8 sm:px-10 py-4 rounded-full text-sm sm:text-base font-bold shadow-gold inline-flex items-center justify-center gap-2"
+            >
+              Enroll Now — Free Consultation
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+            <a
+              href="tel:+923166768001"
+              className="btn-outline-gold w-full sm:w-auto px-8 sm:px-10 py-4 rounded-full text-sm sm:text-base font-bold inline-flex items-center justify-center gap-2"
+            >
+              <Phone className="w-4 h-4" />
+              Call Us: 0316 6768001
+            </a>
+          </motion.div>
         </div>
 
         {/* Trust badges */}
