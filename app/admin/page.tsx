@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import {
   LayoutDashboard, Gift, Star, HelpCircle, Settings, LogOut,
@@ -8,8 +8,6 @@ import {
   MessageSquare, Wrench, BookOpen, Eye, Globe, Phone, RefreshCw,
   Facebook, Youtube, Instagram, Lock, Shield, GraduationCap, Briefcase,
 } from "lucide-react";
-
-const PASS = "admin123@";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface FAQ        { id: string; q: string; a: string }
@@ -84,11 +82,18 @@ export default function AdminPage() {
   const [toast,   setToast]   = useState<{ msg: string; type: "success" | "error" } | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Check session
+  // Check session — verify stored token against server (no client-side bypass possible)
   useEffect(() => {
-    if (sessionStorage.getItem("ait_admin") === "1") {
-      setAuthed(true);
-      loadData();
+    const token = sessionStorage.getItem("ait_admin_token");
+    if (token) {
+      fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: token }),
+      }).then(r => {
+        if (r.ok) { setAuthed(true); loadData(); }
+        else { sessionStorage.removeItem("ait_admin_token"); setLoading(false); }
+      }).catch(() => setLoading(false));
     } else {
       setLoading(false);
     }
@@ -102,29 +107,40 @@ export default function AdminPage() {
       .catch(() => setLoading(false));
   }, []);
 
-  const login = () => {
-    if (pass === PASS) {
-      sessionStorage.setItem("ait_admin", "1");
-      setAuthed(true);
-      loadData();
-    } else {
+  const login = async () => {
+    try {
+      const r = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pass }),
+      });
+      if (r.ok) {
+        sessionStorage.setItem("ait_admin_token", pass);
+        setAuthed(true);
+        loadData();
+      } else {
+        setPassErr(true);
+        setTimeout(() => setPassErr(false), 2000);
+      }
+    } catch {
       setPassErr(true);
       setTimeout(() => setPassErr(false), 2000);
     }
   };
 
   const logout = () => {
-    sessionStorage.removeItem("ait_admin");
+    sessionStorage.removeItem("ait_admin_token");
     setAuthed(false);
     setPass("");
   };
 
   const save = async (sec: string, payload: unknown) => {
     setSaving(true);
+    const token = sessionStorage.getItem("ait_admin_token") ?? "";
     try {
       const r = await fetch("/api/admin", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${PASS}` },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ section: sec, data: payload }),
       });
       if (r.ok) setToast({ msg: "Saved successfully!", type: "success" });
@@ -581,7 +597,7 @@ function FreeResourcesSection({ data, saving, onSave, onChange }: { data: FreeRe
         {(["tools","prompts","resources"] as const).map(t => (
           <button key={t} onClick={() => { setTab(t); setEditing(null); setDraft(null); }}
             className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 capitalize ${tab === t ? "bg-white shadow text-ink" : "text-ink-soft hover:text-ink"}`}>
-            {t} <span className="ml-1 text-[10px] font-bold text-ink-soft">({tab === "tools" ? data.tools.length : tab === "prompts" ? data.prompts.length : data.resources.length})</span>
+            {t} <span className="ml-1 text-[10px] font-bold text-ink-soft">({t === "tools" ? data.tools.length : t === "prompts" ? data.prompts.length : data.resources.length})</span>
           </button>
         ))}
       </div>
@@ -706,6 +722,48 @@ function FreeResourcesSection({ data, saving, onSave, onChange }: { data: FreeRe
   );
 }
 
+// ─── Course Form Fields (module-level — stable identity, no focus-loss bug) ────
+interface CourseFormFieldsProps {
+  d: Course; editing: string | null;
+  onField: (k: keyof Course, v: unknown) => void;
+  onInclude: (i: number, v: string) => void;
+  onIncludeAdd: () => void;
+  onIncludeRemove: (i: number) => void;
+  onCommit: () => void; onCancel: () => void;
+}
+function CourseFormFields({ d, editing, onField, onInclude, onIncludeAdd, onIncludeRemove, onCommit, onCancel }: CourseFormFieldsProps) {
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-2">
+        <input value={d.title} onChange={e => onField("title", e.target.value)} placeholder="Course Title" className="col-span-2 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.badge} onChange={e => onField("badge", e.target.value)} placeholder="Badge (Most Popular)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.price} onChange={e => onField("price", e.target.value)} placeholder="Price (PKR 15,000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.level} onChange={e => onField("level", e.target.value)} placeholder="Level (Beginner → Advanced)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.duration} onChange={e => onField("duration", e.target.value)} placeholder="Duration (6 Weeks)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.students} onChange={e => onField("students", e.target.value)} placeholder="Students (3,500+)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.color} onChange={e => onField("color", e.target.value)} placeholder="Color (#FF0000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+      </div>
+      <textarea value={d.outcome} onChange={e => onField("outcome", e.target.value)} rows={2} placeholder="Outcome — what student achieves" className="w-full border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50 resize-none" />
+      <div>
+        <p className="text-xs font-bold text-ink-soft mb-2 uppercase tracking-widest">Course Includes</p>
+        <div className="space-y-2">
+          {d.includes.map((inc, i) => (
+            <div key={i} className="flex gap-2">
+              <input value={inc} onChange={e => onInclude(i, e.target.value)} placeholder={`Include item ${i + 1}`} className="flex-1 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+              <button onClick={() => onIncludeRemove(i)} className="p-2 rounded-lg text-ink-soft hover:text-red-500 hover:bg-red-50 transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
+            </div>
+          ))}
+          <button onClick={onIncludeAdd} className="text-xs text-gold hover:text-gold/80 flex items-center gap-1 transition-colors"><Plus className="w-3.5 h-3.5" /> Add Item</button>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <button onClick={onCommit} className="btn-gold px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5"><Check className="w-3.5 h-3.5" /> {editing === "_new" ? "Add Course" : "Save"}</button>
+        <button onClick={onCancel} className="px-4 py-2 rounded-lg text-xs font-semibold border border-surface-200 text-ink-soft hover:text-ink transition-colors flex items-center gap-1.5"><X className="w-3.5 h-3.5" /> Cancel</button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Courses Section ──────────────────────────────────────────────────────────
 function CoursesSection({ items, saving, onSave, onChange }: { items: Course[]; saving: boolean; onSave: (d: Course[]) => void; onChange: (d: Course[]) => void }) {
   const blank = (): Course => ({ id: uid(), title: "", level: "Beginner", duration: "4 Weeks", rating: 5, students: "0+", price: "PKR 10,000", badge: "New", color: "#F5B400", iconName: "BookOpen", outcome: "", includes: [""] });
@@ -728,37 +786,6 @@ function CoursesSection({ items, saving, onSave, onChange }: { items: Course[]; 
   const addInclude = () => setDraft(p => p ? ({ ...p, includes: [...p.includes, ""] }) : p);
   const removeInclude = (i: number) => setDraft(p => p ? ({ ...p, includes: p.includes.filter((_, idx) => idx !== i) }) : p);
 
-  const FormFields = ({ d }: { d: Course }) => (
-    <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-2">
-        <input value={d.title} onChange={e => setDraftField("title", e.target.value)} placeholder="Course Title" className="col-span-2 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.badge} onChange={e => setDraftField("badge", e.target.value)} placeholder="Badge (Most Popular)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.price} onChange={e => setDraftField("price", e.target.value)} placeholder="Price (PKR 15,000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.level} onChange={e => setDraftField("level", e.target.value)} placeholder="Level (Beginner → Advanced)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.duration} onChange={e => setDraftField("duration", e.target.value)} placeholder="Duration (6 Weeks)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.students} onChange={e => setDraftField("students", e.target.value)} placeholder="Students (3,500+)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.color} onChange={e => setDraftField("color", e.target.value)} placeholder="Color (#FF0000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-      </div>
-      <textarea value={d.outcome} onChange={e => setDraftField("outcome", e.target.value)} rows={2} placeholder="Outcome — what student achieves" className="w-full border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50 resize-none" />
-      <div>
-        <p className="text-xs font-bold text-ink-soft mb-2 uppercase tracking-widest">Course Includes</p>
-        <div className="space-y-2">
-          {d.includes.map((inc, i) => (
-            <div key={i} className="flex gap-2">
-              <input value={inc} onChange={e => setInclude(i, e.target.value)} placeholder={`Include item ${i + 1}`} className="flex-1 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-              <button onClick={() => removeInclude(i)} className="p-2 rounded-lg text-ink-soft hover:text-red-500 hover:bg-red-50 transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
-            </div>
-          ))}
-          <button onClick={addInclude} className="text-xs text-gold hover:text-gold/80 flex items-center gap-1 transition-colors"><Plus className="w-3.5 h-3.5" /> Add Item</button>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        <button onClick={commit} className="btn-gold px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5"><Check className="w-3.5 h-3.5" /> {editing === "_new" ? "Add Course" : "Save"}</button>
-        <button onClick={cancel} className="px-4 py-2 rounded-lg text-xs font-semibold border border-surface-200 text-ink-soft hover:text-ink transition-colors flex items-center gap-1.5"><X className="w-3.5 h-3.5" /> Cancel</button>
-      </div>
-    </div>
-  );
-
   return (
     <div>
       <SectionHeader title="Courses Manager" desc={`${items.length} courses — edit price, duration, includes, outcome, badge.`} onSave={() => onSave(items)} saving={saving} />
@@ -766,7 +793,7 @@ function CoursesSection({ items, saving, onSave, onChange }: { items: Course[]; 
         {items.map((c, i) => (
           <div key={c.id} className={`card-white overflow-hidden ${editing === c.id ? "border-gold/40" : ""}`}>
             {editing === c.id && draft ? (
-              <div className="p-5"><FormFields d={draft} /></div>
+              <div className="p-5"><CourseFormFields d={draft} editing={editing} onField={setDraftField} onInclude={setInclude} onIncludeAdd={addInclude} onIncludeRemove={removeInclude} onCommit={commit} onCancel={cancel} /></div>
             ) : (
               <div className="flex items-center gap-4 p-5">
                 <span className="text-xs font-black text-gold bg-gold/10 rounded-lg w-7 h-7 flex items-center justify-center shrink-0">{i + 1}</span>
@@ -788,13 +815,53 @@ function CoursesSection({ items, saving, onSave, onChange }: { items: Course[]; 
       {editing === "_new" && draft ? (
         <div className="card-white p-5 border-gold/40 mb-4">
           <p className="text-xs font-bold text-gold uppercase tracking-widest mb-3">New Course</p>
-          <FormFields d={draft} />
+          <CourseFormFields d={draft} editing={editing} onField={setDraftField} onInclude={setInclude} onIncludeAdd={addInclude} onIncludeRemove={removeInclude} onCommit={commit} onCancel={cancel} />
         </div>
       ) : (
         <button onClick={startNew} className="w-full border-2 border-dashed border-surface-300 rounded-2xl py-4 text-sm text-ink-soft hover:border-gold/40 hover:text-gold transition-all flex items-center justify-center gap-2">
           <Plus className="w-4 h-4" /> Add New Course
         </button>
       )}
+    </div>
+  );
+}
+
+// ─── Service Form Fields (module-level — stable identity, no focus-loss bug) ───
+interface ServiceFormFieldsProps {
+  d: Service; editing: string | null;
+  onField: (k: keyof Service, v: unknown) => void;
+  onFeat: (i: number, v: string) => void;
+  onFeatAdd: () => void;
+  onFeatRemove: (i: number) => void;
+  onCommit: () => void; onCancel: () => void;
+}
+function ServiceFormFields({ d, editing, onField, onFeat, onFeatAdd, onFeatRemove, onCommit, onCancel }: ServiceFormFieldsProps) {
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-2">
+        <input value={d.title} onChange={e => onField("title", e.target.value)} placeholder="Service Title" className="col-span-2 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.tagline} onChange={e => onField("tagline", e.target.value)} placeholder="Tagline" className="col-span-2 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.price} onChange={e => onField("price", e.target.value)} placeholder="Price (From PKR 15,000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.type} onChange={e => onField("type", e.target.value)} placeholder="Type (Course / Service)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+        <input value={d.color} onChange={e => onField("color", e.target.value)} placeholder="Color (#FF0000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+      </div>
+      <textarea value={d.desc} onChange={e => onField("desc", e.target.value)} rows={3} placeholder="Service description" className="w-full border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50 resize-none" />
+      <div>
+        <p className="text-xs font-bold text-ink-soft mb-2 uppercase tracking-widest">Features</p>
+        <div className="space-y-2">
+          {d.features.map((f, i) => (
+            <div key={i} className="flex gap-2">
+              <input value={f} onChange={e => onFeat(i, e.target.value)} placeholder={`Feature ${i + 1}`} className="flex-1 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
+              <button onClick={() => onFeatRemove(i)} className="p-2 rounded-lg text-ink-soft hover:text-red-500 hover:bg-red-50 transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
+            </div>
+          ))}
+          <button onClick={onFeatAdd} className="text-xs text-gold hover:text-gold/80 flex items-center gap-1 transition-colors"><Plus className="w-3.5 h-3.5" /> Add Feature</button>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <button onClick={onCommit} className="btn-gold px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5"><Check className="w-3.5 h-3.5" /> {editing === "_new" ? "Add Service" : "Save"}</button>
+        <button onClick={onCancel} className="px-4 py-2 rounded-lg text-xs font-semibold border border-surface-200 text-ink-soft hover:text-ink transition-colors flex items-center gap-1.5"><X className="w-3.5 h-3.5" /> Cancel</button>
+      </div>
     </div>
   );
 }
@@ -821,35 +888,6 @@ function ServicesSection({ items, saving, onSave, onChange }: { items: Service[]
   const addFeat  = () => setDraft(p => p ? ({ ...p, features: [...p.features, ""] }) : p);
   const remFeat  = (i: number) => setDraft(p => p ? ({ ...p, features: p.features.filter((_, idx) => idx !== i) }) : p);
 
-  const FormFields = ({ d }: { d: Service }) => (
-    <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-2">
-        <input value={d.title} onChange={e => setField("title", e.target.value)} placeholder="Service Title" className="col-span-2 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.tagline} onChange={e => setField("tagline", e.target.value)} placeholder="Tagline" className="col-span-2 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.price} onChange={e => setField("price", e.target.value)} placeholder="Price (From PKR 15,000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.type} onChange={e => setField("type", e.target.value)} placeholder="Type (Course / Service)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-        <input value={d.color} onChange={e => setField("color", e.target.value)} placeholder="Color (#FF0000)" className="border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-      </div>
-      <textarea value={d.desc} onChange={e => setField("desc", e.target.value)} rows={3} placeholder="Service description" className="w-full border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50 resize-none" />
-      <div>
-        <p className="text-xs font-bold text-ink-soft mb-2 uppercase tracking-widest">Features</p>
-        <div className="space-y-2">
-          {d.features.map((f, i) => (
-            <div key={i} className="flex gap-2">
-              <input value={f} onChange={e => setFeat(i, e.target.value)} placeholder={`Feature ${i + 1}`} className="flex-1 border border-surface-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold/50" />
-              <button onClick={() => remFeat(i)} className="p-2 rounded-lg text-ink-soft hover:text-red-500 hover:bg-red-50 transition-all"><Trash2 className="w-3.5 h-3.5" /></button>
-            </div>
-          ))}
-          <button onClick={addFeat} className="text-xs text-gold hover:text-gold/80 flex items-center gap-1 transition-colors"><Plus className="w-3.5 h-3.5" /> Add Feature</button>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        <button onClick={commit} className="btn-gold px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5"><Check className="w-3.5 h-3.5" /> {editing === "_new" ? "Add Service" : "Save"}</button>
-        <button onClick={cancel} className="px-4 py-2 rounded-lg text-xs font-semibold border border-surface-200 text-ink-soft hover:text-ink transition-colors flex items-center gap-1.5"><X className="w-3.5 h-3.5" /> Cancel</button>
-      </div>
-    </div>
-  );
-
   return (
     <div>
       <SectionHeader title="Services Manager" desc={`${items.length} services — edit title, tagline, features, price, type.`} onSave={() => onSave(items)} saving={saving} />
@@ -857,7 +895,7 @@ function ServicesSection({ items, saving, onSave, onChange }: { items: Service[]
         {items.map((s, i) => (
           <div key={s.id} className={`card-white overflow-hidden ${editing === s.id ? "border-gold/40" : ""}`}>
             {editing === s.id && draft ? (
-              <div className="p-5"><FormFields d={draft} /></div>
+              <div className="p-5"><ServiceFormFields d={draft} editing={editing} onField={setField} onFeat={setFeat} onFeatAdd={addFeat} onFeatRemove={remFeat} onCommit={commit} onCancel={cancel} /></div>
             ) : (
               <div className="flex items-center gap-4 p-5">
                 <span className="text-xs font-black text-gold bg-gold/10 rounded-lg w-7 h-7 flex items-center justify-center shrink-0">{i + 1}</span>
@@ -879,7 +917,7 @@ function ServicesSection({ items, saving, onSave, onChange }: { items: Service[]
       {editing === "_new" && draft ? (
         <div className="card-white p-5 border-gold/40 mb-4">
           <p className="text-xs font-bold text-gold uppercase tracking-widest mb-3">New Service</p>
-          <FormFields d={draft} />
+          <ServiceFormFields d={draft} editing={editing} onField={setField} onFeat={setFeat} onFeatAdd={addFeat} onFeatRemove={remFeat} onCommit={commit} onCancel={cancel} />
         </div>
       ) : (
         <button onClick={startNew} className="w-full border-2 border-dashed border-surface-300 rounded-2xl py-4 text-sm text-ink-soft hover:border-gold/40 hover:text-gold transition-all flex items-center justify-center gap-2">

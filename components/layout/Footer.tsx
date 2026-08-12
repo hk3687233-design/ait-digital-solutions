@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowRight, Globe } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, ArrowRight, Globe } from "lucide-react";
 
 const services = [
   "YouTube Automation", "TikTok Automation", "E-Commerce Automation",
@@ -79,10 +79,8 @@ export default function Footer() {
             </p>
             <div className="flex gap-2.5">
               {[
-                { icon: Facebook,  href: "https://www.facebook.com/people/AIT-Digital-Solutions/61592822961571/" },
-                { icon: Instagram, href: "#" },
-                { icon: Youtube,   href: "#" },
-                { icon: Globe,     href: "https://aitdigitalsolutions.com" },
+                { icon: Facebook, href: "https://www.facebook.com/people/AIT-Digital-Solutions/61592822961571/" },
+                { icon: Globe,    href: "https://aitdigitalsolutions.com" },
               ].map(({ icon: Icon, href }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer"
                   className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-gray-500 hover:text-gold hover:border-gold/40 hover:bg-gold/5 transition-all duration-200">
@@ -137,7 +135,7 @@ export default function Footer() {
               {[
                 { icon: Phone,  label: "Phone / WhatsApp", value: "0316 6768001",                     href: "tel:+923166768001",                     note: "Mon–Sat, 9AM–9PM" },
                 { icon: Mail,   label: "Email",            value: "info@aitdigitalsolutions.com",      href: "mailto:info@aitdigitalsolutions.com",    note: "Reply within 24 hrs" },
-                { icon: MapPin, label: "Location",         value: "Gujranwala, Punjab, Pakistan",      href: "https://maps.google.com/?q=Gujranwala", note: "Walk-ins welcome" },
+                { icon: MapPin, label: "Location",         value: "Gujranwala, Punjab, Pakistan",      href: "https://maps.google.com/?q=32.1877,74.1945", note: "Walk-ins welcome" },
               ].map((item) => {
                 const Icon = item.icon;
                 return (

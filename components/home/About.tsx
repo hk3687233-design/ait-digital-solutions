@@ -45,6 +45,7 @@ export default function About() {
                   src="/images/team/arslan.jpg"
                   alt="Arslan Ahmad — Co-Founder & CEO"
                   fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
@@ -61,6 +62,7 @@ export default function About() {
                     src="/images/team/iftikhar.jpg"
                     alt="Iftikhar-UL-Hassan — Co-Founder & Director"
                     fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
@@ -75,6 +77,7 @@ export default function About() {
                     src="/images/team/gulzar.jpg"
                     alt="M. Gulzar — Founder & Director"
                     fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />

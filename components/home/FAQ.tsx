@@ -1,42 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import FadeUp from "@/components/shared/FadeUp";
 
-const faqs = [
-  {
-    q: "Who are AIT Digital Solutions courses designed for?",
-    a: "Our courses are designed for beginners, intermediate learners, and professionals who want to build income-generating skills in the digital economy. Whether you're a student, job seeker, business owner, or freelancer — we have a pathway for you.",
-  },
-  {
-    q: "Do I need any prior experience to join?",
-    a: "Most of our courses are beginner-friendly and require no prior technical knowledge. We start from the fundamentals and progressively advance to expert-level strategies. You just need a smartphone or laptop and a strong desire to learn.",
-  },
-  {
-    q: "How are the courses delivered?",
-    a: "We offer a blended learning experience — live online sessions, recorded video lectures, WhatsApp group support, and hands-on practical assignments. Our students get real-world project experience, not just theoretical knowledge.",
-  },
-  {
-    q: "What services does AIT provide beyond training?",
-    a: "Beyond training, we offer full digital services: website development, mobile app development, digital marketing campaigns, branding, YouTube and TikTok automation setup, and e-commerce store management. We build and manage your digital presence.",
-  },
-  {
-    q: "How can I enroll in a course or get a service quote?",
-    a: "Simply click the 'Get Started' button or WhatsApp us at 0316 6768001. Our team will guide you through the enrollment process, recommend the right course based on your goals, and provide a custom service quote within 24 hours.",
-  },
-  {
-    q: "Is there any support after course completion?",
-    a: "Yes! Every student gets lifetime access to our alumni community, course updates, and priority support. We believe in long-term relationships — your success is our reputation.",
-  },
-  {
-    q: "Does AIT issue certificates upon completion?",
-    a: "Yes, we issue professional certificates upon successful course completion that you can add to your CV and LinkedIn profile. Our certificates are recognized by industry partners and clients.",
-  },
+interface FAQItem { id: string; q: string; a: string }
+
+const FALLBACK: FAQItem[] = [
+  { id:"1", q:"Who are AIT Digital Solutions courses designed for?",      a:"Our courses are designed for beginners, intermediate learners, and professionals who want to build income-generating skills in the digital economy. Whether you're a student, job seeker, business owner, or freelancer — we have a pathway for you." },
+  { id:"2", q:"Do I need any prior experience to join?",                   a:"Most of our courses are beginner-friendly and require no prior technical knowledge. We start from the fundamentals and progressively advance to expert-level strategies. You just need a smartphone or laptop and a strong desire to learn." },
+  { id:"3", q:"How are the courses delivered?",                            a:"We offer a blended learning experience — live online sessions, recorded video lectures, WhatsApp group support, and hands-on practical assignments. Our students get real-world project experience, not just theoretical knowledge." },
+  { id:"4", q:"What services does AIT provide beyond training?",           a:"Beyond training, we offer full digital services: website development, mobile app development, digital marketing campaigns, branding, YouTube and TikTok automation setup, and e-commerce store management. We build and manage your digital presence." },
+  { id:"5", q:"How can I enroll in a course or get a service quote?",     a:"Simply click the 'Get Started' button or WhatsApp us at 0316 6768001. Our team will guide you through the enrollment process, recommend the right course based on your goals, and provide a custom service quote within 24 hours." },
+  { id:"6", q:"Is there any support after course completion?",             a:"Yes! Every student gets lifetime access to our alumni community, course updates, and priority support. We believe in long-term relationships — your success is our reputation." },
+  { id:"7", q:"Does AIT issue certificates upon completion?",              a:"Yes, we issue professional certificates upon successful course completion that you can add to your CV and LinkedIn profile. Our certificates are recognized by industry partners and clients." },
 ];
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const [faqs, setFaqs] = useState<FAQItem[]>(FALLBACK);
+
+  useEffect(() => {
+    fetch("/api/admin")
+      .then(r => r.json())
+      .then(d => { if (Array.isArray(d.faq) && d.faq.length > 0) setFaqs(d.faq); })
+      .catch(() => {});
+  }, []);
 
   return (
     <section className="section-soft section-padding">
@@ -57,7 +46,7 @@ export default function FAQ() {
         {/* Accordion */}
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <FadeUp key={i} delay={i * 0.05}>
+            <FadeUp key={faq.id} delay={i * 0.05}>
             <div
               className={`card-white overflow-hidden transition-all duration-300 ${
                 open === i ? "border-gold/30 shadow-gold" : ""

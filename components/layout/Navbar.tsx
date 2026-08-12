@@ -51,7 +51,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-          <div onClick={handleLogoClick} className="flex items-center gap-3 group cursor-pointer select-none">
+          <div onClick={handleLogoClick} onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleLogoClick()} role="button" tabIndex={0} className="flex items-center gap-3 group cursor-pointer select-none">
             <div className="relative w-12 h-12 group-hover:scale-105 transition-transform duration-300">
               <Image
                 src="/images/logo.png"

@@ -5,16 +5,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import FadeUp from "@/components/shared/FadeUp";
 
-const spokes = [
-  { label: "AI Tools",    angle: -90  },
-  { label: "YouTube",     angle: -45  },
-  { label: "Mobile Apps", angle:   0  },
-  { label: "Freelancing", angle:  45  },
-  { label: "Branding",    angle:  90  },
-  { label: "E-Commerce",  angle: 135  },
-  { label: "Automation",  angle: 180  },
-  { label: "Websites",    angle: 225  },
-];
 
 export default function Ecosystem() {
   return (

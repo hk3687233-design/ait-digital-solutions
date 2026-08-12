@@ -88,6 +88,8 @@ export default function TeamPage() {
                 src="/images/team/arslan.jpg"
                 alt="Arslan Ahmad — Co-Founder & CEO, AIT Digital Solutions"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
                 className="object-cover object-top opacity-90"
               />
               {/* Overlay gradient */}

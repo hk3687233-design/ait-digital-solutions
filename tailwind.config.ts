@@ -39,9 +39,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans:    ["Inter",            "system-ui", "sans-serif"],
-        heading: ["Montserrat",       "sans-serif"],
-        display: ["Playfair Display", "serif"],
+        sans:    ["var(--font-inter)",        "system-ui", "sans-serif"],
+        heading: ["var(--font-montserrat)",   "sans-serif"],
+        display: ["var(--font-playfair)",     "serif"],
       },
       backgroundImage: {
         "gold-gradient":     "linear-gradient(135deg, #F5B400 0%, #FFD000 50%, #D4A000 100%)",

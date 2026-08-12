@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Montserrat, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
+
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", display: "swap", weight: ["300","400","500","600","700","800","900"] });
+const inter      = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", weight: ["300","400","500","600","700"] });
+const playfair   = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap", weight: ["400","700"], style: ["normal","italic"] });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -74,10 +79,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${montserrat.variable} ${inter.variable} ${playfair.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

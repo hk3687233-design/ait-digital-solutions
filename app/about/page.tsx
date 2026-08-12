@@ -187,6 +187,8 @@ export default function AboutPage() {
                         src={f.img}
                         alt={`${f.name} — ${f.role}, AIT Digital Solutions`}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        priority
                         className="object-cover object-top"
                       />
                       {/* Bottom gradient overlay */}

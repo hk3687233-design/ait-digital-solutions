@@ -81,6 +81,7 @@ export default function Team() {
                     src={member.img}
                     alt={member.name}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Fallback overlay with initials (shown if image missing) */}

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const ADMIN_PASSWORD = "admin123@";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "admin123@";
 const DATA_DIR = path.join(process.cwd(), "data");
 
 function readFile(name: string) {

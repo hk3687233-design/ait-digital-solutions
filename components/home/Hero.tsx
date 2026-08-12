@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Play, CheckCircle, Sparkles } from "lucide-react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+
+const MotionLink = motion(Link);
 import AnimatedCounter from "@/components/shared/AnimatedCounter";
 
 const highlights = [
@@ -48,7 +50,7 @@ function MagneticButton({ children, href, className }: { children: React.ReactNo
   const onMouseLeave = () => { x.set(0); y.set(0); };
 
   return (
-    <motion.a
+    <MotionLink
       ref={ref}
       href={href}
       style={{ x: springX, y: springY }}
@@ -57,7 +59,7 @@ function MagneticButton({ children, href, className }: { children: React.ReactNo
       className={className}
     >
       {children}
-    </motion.a>
+    </MotionLink>
   );
 }
 
@@ -209,7 +211,7 @@ export default function Hero() {
               </svg>
             </motion.span>
             <br />
-            {["Infinite", "Possibilities."].map((word, i) => (
+            {["Infinite", "Possibilities."].map((word) => (
               <motion.span key={word} variants={wordVariant} className="inline-block mr-[0.25em]">
                 {word}
               </motion.span>

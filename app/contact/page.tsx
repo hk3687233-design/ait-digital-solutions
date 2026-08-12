@@ -34,7 +34,7 @@ const contactInfo = [
     icon: MapPin,
     label: "Location",
     value: "Gujranwala, Punjab, Pakistan",
-    href:  "https://maps.google.com/?q=Gujranwala,Pakistan",
+    href:  "https://maps.google.com/?q=32.1877,74.1945",
     desc:  "Walk-in consultations available",
   },
   {
@@ -143,7 +143,7 @@ export default function ContactPage() {
             <div className="text-center">
               <MapPin className="w-10 h-10 text-gold mx-auto mb-3" />
               <p className="font-heading font-bold text-ink">Gujranwala, Punjab, Pakistan</p>
-              <a href="https://maps.google.com/?q=Gujranwala,Pakistan" target="_blank" rel="noopener noreferrer"
+              <a href="https://maps.google.com/?q=32.1877,74.1945" target="_blank" rel="noopener noreferrer"
                 className="text-gold text-sm hover:underline mt-1 inline-block">
                 Open in Google Maps →
               </a>

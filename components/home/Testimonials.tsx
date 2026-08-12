@@ -1,51 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Star, Quote } from "lucide-react";
 import FadeUp from "@/components/shared/FadeUp";
 
-const testimonials = [
-  {
-    name:   "Ahmed Raza",
-    role:   "Freelance Designer — Gujranwala",
-    rating: 5,
-    text:   "AIT changed my life. Within 3 months of their Freelancing course I was earning $800/month on Upwork. The practical approach is unlike anything else I've tried.",
-    initial:"A",
-  },
-  {
-    name:   "Sana Malik",
-    role:   "YouTube Creator — Lahore",
-    rating: 5,
-    text:   "The YouTube Automation course is gold. My channel went from 0 to 15,000 subscribers in 4 months using exactly what they taught. Incredible mentorship.",
-    initial:"S",
-  },
-  {
-    name:   "Bilal Hussain",
-    role:   "E-Commerce Entrepreneur — Faisalabad",
-    rating: 5,
-    text:   "The E-Commerce training helped me launch my Shopify store and make my first sale in week 2. The community support is amazing. Worth every rupee.",
-    initial:"B",
-  },
-  {
-    name:   "Fareeha Naz",
-    role:   "Digital Marketer — Gujranwala",
-    rating: 5,
-    text:   "Arslan bhai explains complex digital marketing concepts in the simplest way. My agency now handles 5 clients thanks to AIT's Digital Marketing course.",
-    initial:"F",
-  },
-  {
-    name:   "Usman Tariq",
-    role:   "AI Tools Specialist — Islamabad",
-    rating: 5,
-    text:   "The AI Tools training is the most up-to-date content I've found in Pakistan. I now automate 80% of my work and charge premium rates to clients.",
-    initial:"U",
-  },
-  {
-    name:   "Zara Khan",
-    role:   "Content Creator — Karachi",
-    rating: 5,
-    text:   "AIT is not just a course platform — it's a complete ecosystem. From strategy to execution, they have everything a digital creator needs to grow.",
-    initial:"Z",
-  },
+interface Testimonial { id: string; name: string; role: string; rating: number; text: string; initial: string }
+
+const FALLBACK: Testimonial[] = [
+  { id:"1", name:"Ahmed Raza",    role:"Freelance Designer — Gujranwala",       rating:5, initial:"A", text:"AIT changed my life. Within 3 months of their Freelancing course I was earning $800/month on Upwork. The practical approach is unlike anything else I've tried." },
+  { id:"2", name:"Sana Malik",    role:"YouTube Creator — Lahore",               rating:5, initial:"S", text:"The YouTube Automation course is gold. My channel went from 0 to 15,000 subscribers in 4 months using exactly what they taught. Incredible mentorship." },
+  { id:"3", name:"Bilal Hussain", role:"E-Commerce Entrepreneur — Faisalabad",   rating:5, initial:"B", text:"The E-Commerce training helped me launch my Shopify store and make my first sale in week 2. The community support is amazing. Worth every rupee." },
+  { id:"4", name:"Fareeha Naz",   role:"Digital Marketer — Gujranwala",          rating:5, initial:"F", text:"Arslan bhai explains complex digital marketing concepts in the simplest way. My agency now handles 5 clients thanks to AIT's Digital Marketing course." },
+  { id:"5", name:"Usman Tariq",   role:"AI Tools Specialist — Islamabad",        rating:5, initial:"U", text:"The AI Tools training is the most up-to-date content I've found in Pakistan. I now automate 80% of my work and charge premium rates to clients." },
+  { id:"6", name:"Zara Khan",     role:"Content Creator — Karachi",              rating:5, initial:"Z", text:"AIT is not just a course platform — it's a complete ecosystem. From strategy to execution, they have everything a digital creator needs to grow." },
 ];
 
 function StarRating({ count }: { count: number }) {
@@ -59,6 +26,15 @@ function StarRating({ count }: { count: number }) {
 }
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(FALLBACK);
+
+  useEffect(() => {
+    fetch("/api/admin")
+      .then(r => r.json())
+      .then(d => { if (Array.isArray(d.testimonials) && d.testimonials.length > 0) setTestimonials(d.testimonials); })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="section-white section-padding relative overflow-hidden">
       {/* Faint glow */}
@@ -86,7 +62,7 @@ export default function Testimonials() {
         {/* Masonry-style grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
           {testimonials.map((t, i) => (
-            <FadeUp key={t.name} delay={i * 0.08} className="break-inside-avoid">
+            <FadeUp key={t.id} delay={i * 0.08} className="break-inside-avoid">
             <div
               className="card-white p-6 group"
             >
